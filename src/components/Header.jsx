@@ -1,75 +1,74 @@
 // src/components/Header.jsx
 import { motion } from 'framer-motion'
 import { FaGithub, FaLinkedin } from 'react-icons/fa'
+import { FiSun, FiMoon } from 'react-icons/fi'
 
-export default function Header({ activeSection, isScrolled }) {
-  const NavLink = ({ href, children }) => (
-    <a
-      href={href}
-      className={`relative px-4 py-2 text-sm font-medium transition-all duration-300 ${
-        activeSection === href.slice(1)
-          ? 'text-emerald-400'
-          : 'text-gray-300 hover:text-white'
-      }`}
-    >
-      {children}
-      {activeSection === href.slice(1) && (
-        <motion.div
-          layoutId="activeSection"
-          className="absolute bottom-0 left-0 right-0 h-0.5 bg-emerald-400"
-          initial={false}
-          transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-        />
-      )}
-    </a>
-  )
+const SECTIONS = [
+  { id: 'home', num: '00', label: 'Home' },
+  { id: 'about', num: '01', label: 'About' },
+  { id: 'experience', num: '02', label: 'Experience' },
+  { id: 'skills', num: '03', label: 'Skills' },
+  { id: 'projects', num: '04', label: 'Projects' },
+  { id: 'contact', num: '05', label: 'Contact' },
+]
 
+export default function Header({ activeSection, isScrolled, isDark, toggleTheme }) {
   return (
     <motion.header
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      initial={{ y: -60, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6 }}
+      className={`fixed top-0 left-0 right-0 z-50 border-b transition-all duration-300 ${
         isScrolled
-          ? 'bg-gray-900/95 backdrop-blur-lg shadow-2xl border-b border-gray-800'
-          : 'bg-transparent'
+          ? 'bg-base-bg/90 backdrop-blur-md border-base-line'
+          : 'bg-transparent border-transparent'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 py-4">
-        <div className="flex justify-between items-center">
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="text-2xl font-bold bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent"
-          >
-            Osman de León
-          </motion.div>
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="flex justify-between items-center h-16">
+          <a href="#home" className="font-display font-semibold text-lg tracking-tight">
+            OSMAN<span className="text-green-400">.</span>DEV
+          </a>
 
-          <nav className="hidden md:flex items-center gap-2">
-            <NavLink href="#home">Inicio</NavLink>
-            <NavLink href="#about">Sobre mí</NavLink>
-            <NavLink href="#skills">Habilidades</NavLink>
-            <NavLink href="#projects">Proyectos</NavLink>
-            <NavLink href="#contact">Contacto</NavLink>
+          <nav className="hidden md:flex items-center gap-1">
+            {SECTIONS.map((s) => (
+              <a
+                key={s.id}
+                href={`#${s.id}`}
+                className={`px-3 py-2 font-mono text-xs uppercase tracking-wider transition-colors flex items-center gap-2 ${
+                  activeSection === s.id ? 'text-green-400' : 'text-muted hover:text-ink'
+                }`}
+              >
+                <span className="opacity-50">{s.num}</span>
+                {s.label}
+              </a>
+            ))}
           </nav>
 
           <div className="flex items-center gap-4">
-            <motion.a
-              whileHover={{ scale: 1.1, rotate: 5 }}
+            <button
+              onClick={toggleTheme}
+              aria-label="Toggle theme"
+              className="text-muted hover:text-green-400 transition-colors"
+            >
+              {isDark ? <FiSun size={18} /> : <FiMoon size={18} />}
+            </button>
+            <a
               href="https://github.com/Emadlgg/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-emerald-400 transition-colors"
+              className="text-muted hover:text-green-400 transition-colors"
             >
-              <FaGithub size={22} />
-            </motion.a>
-            <motion.a
-              whileHover={{ scale: 1.1, rotate: 5 }}
+              <FaGithub size={18} />
+            </a>
+            <a
               href="https://www.linkedin.com/in/osman-edlg/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-emerald-400 transition-colors"
+              className="text-muted hover:text-green-400 transition-colors"
             >
-              <FaLinkedin size={22} />
-            </motion.a>
+              <FaLinkedin size={18} />
+            </a>
           </div>
         </div>
       </div>

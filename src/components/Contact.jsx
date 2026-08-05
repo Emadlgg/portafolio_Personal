@@ -9,7 +9,7 @@ export default function Contact() {
 
   const handleChange = (e) => {
     const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
+    setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
   const handleSubmit = (e) => {
@@ -20,164 +20,89 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="py-32 bg-gray-900/50">
+    <section id="contact" className="py-32">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
-            <span className="bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
-              Contacto
-            </span>
-          </h2>
+          <div className="label-tag mb-3">// fig. 04 — contact</div>
+          <h2 className="font-display font-bold text-4xl mb-16">Get in Touch</h2>
 
-          <div className="grid md:grid-cols-2 gap-12">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="space-y-8"
-            >
-              <h3 className="text-2xl font-semibold mb-6">Hablemos</h3>
-              
-              <div className="flex items-start gap-4 group">
-                <div className="p-3 bg-gradient-to-br from-emerald-600 to-teal-600 rounded-xl group-hover:scale-110 transition-transform">
-                  <FiMail className="text-xl" />
+          <div className="grid lg:grid-cols-5 gap-8">
+            <div className="lg:col-span-2 space-y-1">
+              {[
+                { icon: <FiMail />, label: 'email', value: 'osman.edlg04@gmail.com', href: 'mailto:osmanemanuel2004@gmail.com' },
+                { icon: <FiPhone />, label: 'phone', value: '+502 4197 2946', href: 'https://wa.me/50241972946' },
+                { icon: <FiMapPin />, label: 'location', value: 'Guatemala, Guatemala', href: null },
+              ].map((item) => (
+                <div key={item.label} className="flex items-center gap-4 py-4 border-b border-base-line">
+                  <span className="text-blue-400">{item.icon}</span>
+                  <div>
+                    <div className="font-mono text-[11px] uppercase text-muted">{item.label}</div>
+                    {item.href ? (
+                      <a href={item.href} target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors">
+                        {item.value}
+                      </a>
+                    ) : (
+                      <span>{item.value}</span>
+                    )}
+                  </div>
                 </div>
-                <div>
-                  <h4 className="font-semibold mb-1">Email</h4>
-                  <a href="mailto:osmanemanuel2004@gmail.com" className="text-gray-400 hover:text-emerald-400 transition-colors">
-                    osmanemanuel2004@gmail.com
+              ))}
+
+              <div className="flex gap-3 pt-6">
+                {[
+                  { icon: <FaGithub size={18} />, href: 'https://github.com/Emadlgg/' },
+                  { icon: <FaLinkedin size={18} />, href: 'https://www.linkedin.com/in/osman-edlg/' },
+                  { icon: <FaInstagram size={18} />, href: 'https://www.instagram.com/emadlg_/' },
+                ].map((s, i) => (
+                  <a
+                    key={i}
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-3 border border-base-line text-muted hover:text-blue-400 hover:border-blue-400 transition-colors"
+                  >
+                    {s.icon}
                   </a>
-                </div>
+                ))}
               </div>
+            </div>
 
-              <div className="flex items-start gap-4 group">
-                <div className="p-3 bg-gradient-to-br from-emerald-600 to-teal-600 rounded-xl group-hover:scale-110 transition-transform">
-                  <FiMapPin className="text-xl" />
-                </div>
-                <div>
-                  <h4 className="font-semibold mb-1">Ubicación</h4>
-                  <p className="text-gray-400">Guatemala, Guatemala</p>
-                </div>
+            <form onSubmit={handleSubmit} className="lg:col-span-3 border border-base-line bg-base-panel p-6 space-y-5">
+              <div className="label-tag pb-3 border-b border-base-line">send_message()</div>
+
+              <div>
+                <label htmlFor="name" className="block mb-2 font-mono text-xs text-muted uppercase">name</label>
+                <input
+                  type="text" id="name" name="name" value={formData.name} onChange={handleChange} required
+                  className="w-full p-3 bg-base-bg border border-base-line focus:border-blue-400 outline-none transition-colors"
+                />
               </div>
-
-              <div className="flex items-start gap-4 group">
-                <div className="p-3 bg-gradient-to-br from-emerald-600 to-teal-600 rounded-xl group-hover:scale-110 transition-transform">
-                  <FiPhone className="text-xl" />
-                </div>
-                <div>
-                  <h4 className="font-semibold mb-1">Teléfono</h4>
-                  <a href="https://wa.me/50241972946" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-emerald-400 transition-colors">
-                    +502 41972946
-                  </a>
-                </div>
+              <div>
+                <label htmlFor="email" className="block mb-2 font-mono text-xs text-muted uppercase">email</label>
+                <input
+                  type="email" id="email" name="email" value={formData.email} onChange={handleChange} required
+                  className="w-full p-3 bg-base-bg border border-base-line focus:border-blue-400 outline-none transition-colors"
+                />
               </div>
-
-              <div className="flex gap-4 pt-6">
-                <motion.a
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                  href="https://github.com/Emadlgg/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-3 bg-gray-800 hover:bg-emerald-600 rounded-xl transition-all"
-                >
-                  <FaGithub size={24} />
-                </motion.a>
-                <motion.a
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                  href="https://www.linkedin.com/in/osman-edlg/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-3 bg-gray-800 hover:bg-emerald-600 rounded-xl transition-all"
-                >
-                  <FaLinkedin size={24} />
-                </motion.a>
-                <motion.a
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                  href="https://x.com/Osman_E61"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-3 bg-gray-800 hover:bg-emerald-600 rounded-xl transition-all"
-                >
-                  <FaTwitter size={24} />
-                </motion.a>
-                <motion.a
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                  href="https://www.instagram.com/emadlg_/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-3 bg-gray-800 hover:bg-emerald-600 rounded-xl transition-all"
-                >
-                  <FaInstagram size={24} />
-                </motion.a>
+              <div>
+                <label htmlFor="message" className="block mb-2 font-mono text-xs text-muted uppercase">message</label>
+                <textarea
+                  id="message" name="message" rows="4" value={formData.message} onChange={handleChange} required
+                  className="w-full p-3 bg-base-bg border border-base-line focus:border-blue-400 outline-none transition-colors resize-none"
+                />
               </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="bg-gradient-to-br from-gray-800 to-gray-900 p-8 rounded-2xl shadow-2xl"
-            >
-              <h3 className="text-xl font-semibold mb-6">Envíame un mensaje</h3>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label htmlFor="name" className="block mb-2 text-sm font-medium">
-                    Nombre
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="w-full p-3 bg-gray-700/50 border border-gray-600 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all outline-none"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="email" className="block mb-2 text-sm font-medium">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="w-full p-3 bg-gray-700/50 border border-gray-600 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all outline-none"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="message" className="block mb-2 text-sm font-medium">
-                    Mensaje
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows="5"
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    className="w-full p-3 bg-gray-700/50 border border-gray-600 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all outline-none resize-none"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-lg hover:from-emerald-500 hover:to-teal-500 transition-all duration-300 font-semibold shadow-lg hover:shadow-emerald-500/50 transform hover:scale-105"
-                >
-                  Enviar Mensaje
-                </button>
-              </form>
-            </motion.div>
+              <button
+                type="submit"
+                className="px-6 py-3 bg-blue-400 text-base-bg font-mono text-sm font-medium hover:bg-blue-500 transition-colors w-full sm:w-auto"
+              >
+                submit →
+              </button>
+            </form>
           </div>
         </motion.div>
       </div>

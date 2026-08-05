@@ -2,13 +2,114 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* Light mode — "paper" blueprint */
+  --bg: #F3F5F1;
+  --panel: #FFFFFF;
+  --line: #DCE3DC;
+  --ink: #121814;
+  --muted: #5B6B62;
+  --grid: rgba(31, 143, 91, 0.09);
+  --green: #1F8F5B;
+  --green-strong: #167048;
+  --amber: #B9790F;
+  --amber-strong: #93600C;
+}
+
+.dark {
+  /* Dark mode — "blueprint" ink */
+  --bg: #0A0F0D;
+  --panel: #0F1613;
+  --line: #1E2B25;
+  --ink: #E7EFEA;
+  --muted: #8A9A92;
+  --grid: rgba(79, 191, 136, 0.07);
+  --green: #4FBF88;
+  --green-strong: #6FD3A0;
+  --amber: #F2A93B;
+  --amber-strong: #F7C069;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
   }
-  
+
   body {
-    @apply bg-white dark:bg-gray-900 text-gray-900 dark:text-white;
-    transition: all 0.3s ease;
+    @apply bg-base-bg text-ink font-sans;
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 48px 48px;
+    background-attachment: fixed;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+}
+
+@layer components {
+  .draft-corners {
+    position: relative;
+  }
+  .draft-corners::before,
+  .draft-corners::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border: 1.5px solid var(--green);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .draft-corners::before {
+    top: -1px;
+    left: -1px;
+    border-right: none;
+    border-bottom: none;
+  }
+  .draft-corners::after {
+    bottom: -1px;
+    right: -1px;
+    border-left: none;
+    border-top: none;
+  }
+  .draft-corners:hover::before,
+  .draft-corners:hover::after {
+    opacity: 1;
+  }
+
+  .label-tag {
+    @apply font-mono text-xs uppercase tracking-widest text-green-400;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 0px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--green);
+}
+
+::selection {
+  background-color: var(--green);
+  color: var(--bg);
+}
+
+*:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

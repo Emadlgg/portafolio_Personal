@@ -1,96 +1,72 @@
 // src/components/Skills.jsx
-import { motion } from 'framer-motion'
-import { useInView } from 'react-intersection-observer'
-import { skillsByCategory } from '../data/skills'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { skillsSchema, typeColors } from '../data/skills'
 
-const SkillBadge = ({ skill, index }) => {
-  const [ref, inView] = useInView({ threshold: 0.1, triggerOnce: true })
-
-  if (skill.text) {
-    return (
-      <motion.div
-        ref={ref}
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={inView ? { opacity: 1, scale: 1 } : {}}
-        transition={{ duration: 0.5, delay: index * 0.05 }}
-        whileHover={{ scale: 1.05 }}
-        className="cursor-pointer"
-      >
-        <img 
-          src={skill.badge} 
-          alt={skill.name}
-          className="h-8 w-auto"
-        />
-      </motion.div>
-    )
-  }
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={inView ? { opacity: 1, scale: 1 } : {}}
-      transition={{ duration: 0.5, delay: index * 0.05 }}
-      whileHover={{ scale: 1.1, rotate: 5 }}
-      className="flex flex-col items-center justify-center p-6 bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl shadow-xl hover:shadow-emerald-500/20 transition-all duration-300 cursor-pointer group"
-    >
-      <div className={`${skill.color} mb-3 transform group-hover:scale-110 transition-transform`}>
-        {skill.icon}
-      </div>
-      <span className="text-sm font-medium text-gray-300 group-hover:text-white transition-colors text-center">
-        {skill.name}
-      </span>
-    </motion.div>
-  )
-}
+const TYPES = ['all', 'language', 'frontend', 'backend', 'database', 'data', 'quality', 'tooling', 'support']
 
 export default function Skills() {
+  const [filter, setFilter] = useState('all')
+
+  const rows = filter === 'all' ? skillsSchema : skillsSchema.filter((s) => s.type === filter)
+
   return (
-    <section id="skills" className="py-32 bg-gray-900/50">
+    <section id="skills" className="py-32">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-4">
-            <span className="bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
-              Technical Skills
-            </span>
-          </h2>
-          <p className="text-center text-gray-400 mb-16 text-lg">
-            Tecnologías y herramientas con las que trabajo
+          <div className="label-tag mb-3">// fig. 03 — skills_schema</div>
+          <h2 className="font-display font-bold text-4xl mb-4">Skills</h2>
+          <p className="text-muted mb-10 max-w-xl">
+            Representadas como un esquema de base de datos — porque, honestamente, así es como pienso mi stack.
           </p>
 
-          <div className="space-y-16">
-            {Object.entries(skillsByCategory).map(([category, skillList], catIndex) => (
-              <div key={category}>
-                <motion.h3
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: catIndex * 0.1 }}
-                  className="text-2xl font-semibold mb-8 text-emerald-400 text-center"
-                >
-                  {category}
-                </motion.h3>
-                
-                {category === "Methodologies & Practices" || category === "IT Support & Troubleshooting" ? (
-                  <div className="flex flex-wrap gap-4">
-                    {skillList.map((skill, index) => (
-                      <SkillBadge key={skill.name} skill={skill} index={index} />
-                    ))}
-                  </div>
-                ) : (
-                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
-                    {skillList.map((skill, index) => (
-                      <SkillBadge key={skill.name} skill={skill} index={index} />
-                    ))}
-                  </div>
-                )}
-              </div>
+          {/* filter tabs */}
+          <div className="flex flex-wrap gap-2 mb-6">
+            {TYPES.map((t) => (
+              <button
+                key={t}
+                onClick={() => setFilter(t)}
+                className={`px-3 py-1.5 font-mono text-xs uppercase tracking-wider border transition-colors ${
+                  filter === t
+                    ? 'border-green-400 text-green-400'
+                    : 'border-base-line text-muted hover:text-ink hover:border-ink'
+                }`}
+              >
+                {t}
+              </button>
             ))}
+          </div>
+
+          <div className="border border-base-line bg-base-panel overflow-hidden">
+            <div className="grid grid-cols-12 px-5 py-3 border-b border-base-line label-tag">
+              <span className="col-span-5 sm:col-span-4">field</span>
+              <span className="col-span-3 sm:col-span-2">type</span>
+              <span className="hidden sm:block sm:col-span-6">description</span>
+            </div>
+            <AnimatePresence mode="popLayout">
+              {rows.map((s) => (
+                <motion.div
+                  layout
+                  key={s.field}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="grid grid-cols-12 px-5 py-4 border-b border-base-line last:border-b-0 items-center hover:bg-white/[0.03] transition-colors"
+                >
+                  <span className="col-span-7 sm:col-span-4 font-medium">{s.field}</span>
+                  <span className={`col-span-5 sm:col-span-2 font-mono text-xs uppercase ${typeColors[s.type]}`}>
+                    {s.type}
+                  </span>
+                  <span className="hidden sm:block sm:col-span-6 text-sm text-muted">{s.note}</span>
+                </motion.div>
+              ))}
+            </AnimatePresence>
           </div>
         </motion.div>
       </div>
