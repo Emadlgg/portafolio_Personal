@@ -28,7 +28,7 @@ export default function Contact() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <div className="label-tag mb-3">// fig. 04 — contact</div>
+          <div className="label-tag mb-3">// fig. 05 — contact</div>
           <h2 className="font-display font-bold text-4xl mb-16">Get in Touch</h2>
 
           <div className="grid lg:grid-cols-5 gap-8">

@@ -13,7 +13,7 @@ export default function Projects() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <div className="label-tag mb-3">// fig. 03 — projects</div>
+          <div className="label-tag mb-3">// fig. 04 — projects</div>
           <h2 className="font-display font-bold text-4xl mb-16">Selected Work</h2>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">

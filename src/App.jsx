@@ -5,6 +5,7 @@ import Hero from './components/Hero'
 import About from './components/About'
 import Experience from './components/Experience'
 import Skills from './components/Skills'
+import Personal from './components/Personal'
 import Projects from './components/Projects'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
@@ -23,7 +24,7 @@ function App() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50)
 
-      const sections = ['home', 'about', 'experience', 'skills', 'projects', 'contact']
+      const sections = ['home', 'about', 'experience', 'skills', 'personal', 'projects', 'contact']
       const current = sections.find(section => {
         const element = document.getElementById(section)
         if (element) {
@@ -53,6 +54,7 @@ function App() {
         <About />
         <Experience />
         <Skills />
+        <Personal />
         <Projects />
         <Contact />
       </main>

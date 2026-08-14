@@ -8,8 +8,9 @@ const SECTIONS = [
   { id: 'about', num: '01', label: 'About' },
   { id: 'experience', num: '02', label: 'Experience' },
   { id: 'skills', num: '03', label: 'Skills' },
-  { id: 'projects', num: '04', label: 'Projects' },
-  { id: 'contact', num: '05', label: 'Contact' },
+  { id: 'personal', num: '04', label: 'Personal' },
+  { id: 'projects', num: '05', label: 'Projects' },
+  { id: 'contact', num: '06', label: 'Contact' },
 ]
 
 export default function Header({ activeSection, isScrolled, isDark, toggleTheme }) {

@@ -5,6 +5,23 @@ import { skillsSchema, typeColors } from '../data/skills'
 
 const TYPES = ['all', 'language', 'frontend', 'backend', 'database', 'data', 'quality', 'tooling', 'support']
 
+function LevelBar({ level }) {
+  return (
+    <div className="flex items-center gap-2">
+      <div className="flex-1 h-1 bg-base-line overflow-hidden">
+        <motion.div
+          className="h-full bg-green-400"
+          initial={{ width: 0 }}
+          whileInView={{ width: `${level}%` }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
+        />
+      </div>
+      <span className="font-mono text-[10px] text-muted w-7 text-right shrink-0">{level}%</span>
+    </div>
+  )
+}
+
 export default function Skills() {
   const [filter, setFilter] = useState('all')
 
@@ -25,7 +42,6 @@ export default function Skills() {
             Representadas como un esquema de base de datos — porque, honestamente, así es como pienso mi stack.
           </p>
 
-          {/* filter tabs */}
           <div className="flex flex-wrap gap-2 mb-6">
             {TYPES.map((t) => (
               <button
@@ -44,9 +60,10 @@ export default function Skills() {
 
           <div className="border border-base-line bg-base-panel overflow-hidden">
             <div className="grid grid-cols-12 px-5 py-3 border-b border-base-line label-tag">
-              <span className="col-span-5 sm:col-span-4">field</span>
+              <span className="col-span-4 sm:col-span-3">field</span>
               <span className="col-span-3 sm:col-span-2">type</span>
-              <span className="hidden sm:block sm:col-span-6">description</span>
+              <span className="col-span-5 sm:col-span-3">level</span>
+              <span className="hidden sm:block sm:col-span-4">description</span>
             </div>
             <AnimatePresence mode="popLayout">
               {rows.map((s) => (
@@ -59,11 +76,14 @@ export default function Skills() {
                   transition={{ duration: 0.2 }}
                   className="grid grid-cols-12 px-5 py-4 border-b border-base-line last:border-b-0 items-center hover:bg-white/[0.03] transition-colors"
                 >
-                  <span className="col-span-7 sm:col-span-4 font-medium">{s.field}</span>
-                  <span className={`col-span-5 sm:col-span-2 font-mono text-xs uppercase ${typeColors[s.type]}`}>
+                  <span className="col-span-4 sm:col-span-3 font-medium pr-2">{s.field}</span>
+                  <span className={`col-span-3 sm:col-span-2 font-mono text-xs uppercase ${typeColors[s.type]}`}>
                     {s.type}
                   </span>
-                  <span className="hidden sm:block sm:col-span-6 text-sm text-muted">{s.note}</span>
+                  <span className="col-span-5 sm:col-span-3 pr-2">
+                    <LevelBar level={s.level} />
+                  </span>
+                  <span className="hidden sm:block sm:col-span-4 text-sm text-muted">{s.note}</span>
                 </motion.div>
               ))}
             </AnimatePresence>
