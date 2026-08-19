@@ -1,5 +1,17 @@
 // src/data/projects.jsx
 export const projects = [
+    {
+    name: 'Data Science',
+    description: 'Series de tiempo, deep learning y análisis geoespacial — forecasting con SARIMA/Prophet/LSTM e imágenes satelitales Sentinel-2.',
+    tags: ['python', 'data-science', 'notebooks'],
+    internalLink: '/lab/data-science',
+  },
+  {
+    name: 'Modelación y Simulación',
+    description: 'Laboratorios del curso — modelos matemáticos aplicados resueltos en notebooks.',
+    tags: ['python', 'modeling', 'notebooks'],
+    internalLink: '/lab/modelacion-simulacion',
+  },
   {
     name: 'Movie APP',
     description: 'Aplicación web desarrollada con Angular 20 y TailwindCSS que consume la API de TMDB para explorar películas.',
