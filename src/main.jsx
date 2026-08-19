@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Analytics } from '@vercel/analytics/react'
 import App from './App'
 import LabPage from './components/LabPage'
 import './index.css'
@@ -15,6 +16,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/" element={<App />} />
         <Route path="/lab/:slug" element={<LabPage />} />
       </Routes>
+      <Analytics />
     </BrowserRouter>
   </React.StrictMode>
 )
