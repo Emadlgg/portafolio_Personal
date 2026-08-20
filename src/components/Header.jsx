@@ -28,7 +28,7 @@ export default function Header({ activeSection, isScrolled, isDark, toggleTheme 
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex justify-between items-center h-16">
           <a href="#home" className="font-display font-semibold text-lg tracking-tight">
-            OSMAN<span className="text-green-400">.</span>DEV
+            OSMAN<span className="text-green-400">.</span>EDLG
           </a>
 
           <nav className="hidden md:flex items-center gap-1">

@@ -1,63 +1,104 @@
-// src/data/projects.jsx
 export const projects = [
-    {
+  // ─────────────────────────────────────────────
+  // LABS / CONTINUOUS WORK
+  // ─────────────────────────────────────────────
+
+  {
     name: 'Data Science',
-    description: 'Series de tiempo, deep learning y análisis geoespacial — forecasting con SARIMA/Prophet/LSTM e imágenes satelitales Sentinel-2.',
+    description:
+      'Series de tiempo, deep learning y análisis geoespacial — forecasting con SARIMA/Prophet/LSTM e imágenes satelitales Sentinel-2.',
     tags: ['python', 'data-science', 'notebooks'],
     internalLink: '/lab/data-science',
   },
+
   {
     name: 'Modelación y Simulación',
-    description: 'Laboratorios del curso — modelos matemáticos aplicados resueltos en notebooks.',
+    description:
+      'Laboratorios del curso — modelos matemáticos aplicados resueltos en notebooks.',
     tags: ['python', 'modeling', 'notebooks'],
     internalLink: '/lab/modelacion-simulacion',
   },
+
+  // ─────────────────────────────────────────────
+  // FEATURED PROJECTS
+  // ─────────────────────────────────────────────
+
   {
-    name: 'Movie APP',
-    description: 'Aplicación web desarrollada con Angular 20 y TailwindCSS que consume la API de TMDB para explorar películas.',
-    tags: ['Angular', 'TypeScript', 'TailwindCSS', 'TMDB API'],
-    codeUrl: 'https://github.com/Emadlgg/Movie_App.git',
-    image: 'https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/28/6f/83/286f8381-f792-ed2b-2419-d1f4d20fbd36/AppIcon-0-0-1x_U007emarketing-0-11-0-0-85-220.png/1200x630wa.jpg',
-    gradient: 'from-indigo-600 to-purple-600'
+    name: 'Compiler Toolkit — YALex + YAPar',
+    description:
+      'Toolkit de compiladores inspirado en Lex/Yacc, construido desde cero con generación de lexers, autómatas y parsers LL(1), SLR(1) y LALR.',
+    tags: ['Python', 'Compilers', 'Automata', 'LALR'],
+    codeUrl: 'https://github.com/Emadlgg/compiler-toolkit',
+    demoUrl: 'https://youtu.be/i4ffWxEBaM0',
+    featured: true,
   },
+
+  {
+    name: '3D Solar System',
+    description:
+      'Simulación 3D renderizada desde cero en Rust con software rendering, shaders procedurales, Z-buffer, física orbital y navegación 3D.',
+    tags: ['Rust', '3D Graphics', 'Shaders', 'Rendering'],
+    codeUrl: 'https://github.com/Emadlgg/rust-solar-system',
+    demoUrl: 'https://youtu.be/Ba7nvaB2LQQ',
+    featured: true,
+  },
+
+  {
+    name: 'MCP Chatbot',
+    description:
+      'Asistente con Gemini y un cliente MCP implementado manualmente mediante JSON-RPC 2.0 para descubrir y ejecutar herramientas de servidores MCP.',
+    tags: ['Python', 'MCP', 'JSON-RPC', 'Gemini'],
+    codeUrl: 'https://github.com/Emadlgg/mcp-chatbot',
+    featured: true,
+  },
+
+  {
+    name: 'Supply Chain Graph',
+    description:
+      'Plataforma full-stack para modelar y gestionar cadenas de suministro mediante grafos y relaciones entre proveedores, fabricantes, productos y centros de distribución.',
+    tags: ['React', 'Express', 'Neo4j', 'REST API'],
+    codeUrl: 'https://github.com/Emadlgg/supply-chain-graph',
+    featured: true,
+  },
+
+  {
+    name: 'The Backrooms Escape',
+    description:
+      'Juego 2.5D desarrollado en Rust con un motor de raycasting propio, sprites animados, detección de colisiones, múltiples niveles y audio espacial.',
+    tags: ['Rust', 'Raycasting', 'Raylib', 'Game Dev'],
+    codeUrl: 'https://github.com/Emadlgg/rust-raycasting-engine',
+    featured: true,
+  },
+
+  {
+    name: 'Music Recommendation System',
+    description:
+      'Sistema de recomendación musical que combina KNN, Decision Trees, SVM e inferencia probabilística mediante Redes Bayesianas.',
+    tags: ['Python', 'Machine Learning', 'Bayesian Networks', 'SVM'],
+    codeUrl: 'https://github.com/Emadlgg/music-recommendation-ml',
+    demoUrl: 'https://youtu.be/NzsMGKM9M6M',
+    featured: true,
+  },
+
+  // ─────────────────────────────────────────────
+  // OTHER PROJECTS
+  // ─────────────────────────────────────────────
+
+  {
+    name: 'Movie Explorer',
+    description:
+      'Aplicación web desarrollada con Angular y TypeScript que consume la API de TMDB para explorar películas con scroll infinito.',
+    tags: ['Angular', 'TypeScript', 'TailwindCSS', 'TMDB'],
+    codeUrl: 'https://github.com/Emadlgg/Movie_App',
+  },
+
   {
     name: 'Presence Website',
-    description: 'Sitio web corporativo de PRessence construido con Next.js, Tailwind CSS, Notion y deployado en Vercel.',
-    tags: ['Next.js', 'Tailwind CSS', 'Notion API', 'Vercel'],
-    codeUrl: 'https://github.com/Emadlgg/presence_website.git',
-    image: 'https://media.discordapp.net/attachments/810581004162957332/1451085955816489002/image.png?ex=6944e49b&is=6943931b&hm=814d01b528aceae50637a8b8aeb43528da97067073be4bcd1782e1dcef21fcb0&=&format=webp&quality=lossless',
-    gradient: 'from-indigo-600 to-purple-600'
-  }, 
-  {
-    name: 'Máquina de Turing para Cifrado César',
-    description: 'Máquina de Turing que encripta y desencripta mensajes con cifrado César. Implementación educativa que respeta las restricciones computacionales de una MT tradicional.',
-    tags: ['python', 'Turing Machine', 'Cifrado César'],
-    codeUrl: 'https://github.com/Emadlgg/proyecto3_teoria.git',
-    image: 'https://lemnismath.org/wp-content/uploads/2025/04/cifrados-768x432.png',
-    gradient: 'from-indigo-600 to-purple-600'
-  },  
-  {
-    name: 'Sistema de Gestión de Reportes',
-    description: 'Aplicación web para gestionar y generar reportes bibliotecarios utilizando bases de datos.',
-    tags: ['Python', 'Flask', 'SQLite', 'Full Stack'],
-    codeUrl: 'https://github.com/Emadlgg/ProyectoBD_3.git',
-    image: 'https://agendapro.com/web_assets/img/Desktop_-Reportes-de-gestion-8-1.webp',
-    gradient: 'from-green-600 to-teal-600'
+    description:
+      'Sitio corporativo construido con Next.js y Notion como headless CMS, con contenido dinámico y despliegue en producción mediante Vercel.',
+    tags: ['Next.js', 'Notion API', 'Headless CMS', 'Vercel'],
+    codeUrl: 'https://github.com/Emadlgg/presence_website',
+    liveUrl:
+      'https://presence-website-3j6y-git-master-emadlgs-projects.vercel.app',
   },
-  {
-    name: 'Chat Con JavaScript',
-    description: 'Sistema de chat simple consumiendo un API, utilizando JavaScript, HTML y CSS.',
-    tags: ['JavaScript', 'HTML', 'CSS'],
-    codeUrl: 'https://github.com/Emadlgg/Lab5_JSOnly.git',
-    image: 'https://cdn.prod.website-files.com/66e2765d540e1939a89db4bb/66e2765d540e1939a89dbaf6_javascript-chat-sdk.webp',
-    gradient: 'from-yellow-600 to-orange-600'
-  },
-  {
-    name: 'Manejo de BD con ORM',
-    description: 'Aplicación de gestión de base de datos utilizando ORM para realizar operaciones CRUD.',
-    tags: ['Database', 'PostgreSQL', 'Python', 'API REST'],
-    codeUrl: 'https://github.com/Emadlgg/lab3_BD.git',
-    image: 'https://cdn.hashnode.com/res/hashnode/image/upload/v1689555022980/c64b93b7-52d1-4281-ae82-1c87cf6b41c8.png',
-    gradient: 'from-indigo-600 to-purple-600'
-  }
 ]
